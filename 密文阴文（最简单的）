@@ -1,0 +1,23 @@
+s=input('输入明文s：')
+t=''
+for c in s:
+    if c.isalpha():
+        n=ord(c)
+        m=n+6
+        t+=chr(m)
+    else:
+        t+=c
+        print('输出密文t:',t)
+
+s=input('输入明文s：')
+t=''
+for c in s:
+    if c.isalpha() or ord(c)>=65 and ord(c)<=65+26:
+        n=ord(c)
+        m=n+6
+if m > ord('z') or (m>ord('Z') and m<ord('Z')+7):
+    m-=26
+    t+=chr(m)
+else:
+    t+=c
+    print('输出密文t:',t)
