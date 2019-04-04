@@ -1,21 +1,22 @@
-import pygame,sys,random
+import pygame,sys，random
 from pygame.locals import *
 pygame.init()
 mainClock = pygame.time.Clock()
 
 WINDOWWIDTH=400
 WINDOWHEIGHT=400
-pygame.display.set_caption('Collision Detection')
 windowSurface = pygame.display.set_mode((WINDOWWIDTH,WINDOWHEIGHT),0,32)
+pygame.display.set_caption('Collision Detection')
 
+foodCounter = 0
+NEWFOOD=40
+FOODSIZE=20
 BLACK=(0,0,0)
 WHITE=(255,255,255)
 RED=(255,0,0)
 GREEN=(0,255,0)
 BLUE=(0,0,255)
-foodCounter = 0
-NEWFOOD=40
-FOODSIZE=20
+
 MOVESPEED=6
 player = pygame.Rect(300,100,50,50)
 foods=[]
@@ -65,9 +66,9 @@ while True:
             if event.type == MOUSEBUTTONUP:
                 food.append(pygame.Rect(event.pos[0],event.pos[1],FOODSIZE,FOODSIZE))
             foodCounter += 1
-            if foodCounter >=NEWFOOD:
+            if foodCounter >= NEWFOOD:
                 foodCounter = 0
-                food.append
+                food.append(pygame.Rect(random.randint(0,WINDOWWIDTH-FOODSIZE),random.randint(0,WINDOWWIDTH-FOODSIZE),FOODSIZE,FOODSIZE))
             windowSurace.fill(WHITE)
             if moveDown and player.bottom < WINDOWHEIGHT:
                 player.top += MOVESPEED
