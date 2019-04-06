@@ -1,0 +1,329 @@
+列表：多个数据元素组成的有序序列。类型可以不同
+
+列表是Python中最常用的数据结构。
+列表：由多个数据元素组成的有序序列。
+列表的每个元素的类型可以不同。
+内容包括：创建列表、编辑列表和使用列表等。
+
+创建列表：[...]、range(n)、list(…)、x*n，n*x、x=[[1,2,3],[4,5,6]]
+添加元素：x.insert(2,6)，x.apend(6)，x.extend([1,2])
+索引分片：x[i[:j[:k]]]，index(x[,m[,n]]
+修改元素：s[i]=y、s[s.index(x)]=y
+删除元素：s.remove(6)，s.pop(2)，s.clear()，del s[3:6]
+访问列表：for x in [1,2,3,4,5,6]:print(x)、y= x[i:j:k]
+使用列表：s+t、len(s)，sum(s)，max(s)，min(s)、比较、sorted()和s.sort()、reversed()和s.reverse()、s.count(x)
+
+
+创建列表
+
+使用[...]、range(n)和list(…)创建。如果列表中不含任何元素，则可以创建空列表。
+例如：x=[]，x=list()，x=[u,v,w]，x=list(range(9))。
+>>> print([],list(),type([]),type(list()))
+[] [] <class 'list'> <class 'list'>
+>>> print(['a','b','c','d'],list(range(9)),type(list(range(9))))
+['a', 'b', 'c', 'd'] [0, 1, 2, 3, 4, 5, 6, 7, 8] <class 'list'>
+>>> print(list(range(1,60,5)))
+[1, 6, 11, 16, 21, 26, 31, 36, 41, 46, 51, 56]
+>>> print([1,2,3,4,5,6,'a','b','b',10.36])
+[1, 2, 3, 4, 5, 6, 'a', 'b', 'b', 10.36]
+利用乘法*创建列表。
+例如：x*n，n*x。
+>>> print([3]*6,9*[5])
+[3, 3, 3, 3, 3, 3] [5, 5, 5, 5, 5, 5, 5, 5, 5]
+利用list()可以把字符串或元组转换为列表。
+>>> print(list('abcdef123456'))
+['a', 'b', 'c', 'd', 'e', 'f', '1', '2', '3', '4', '5', '6']
+>>> print(list((1,2,3,4,5,6,'a','b','c','d','e','f')))
+[1, 2, 3, 4, 5, 6, 'a', 'b', 'c', 'd', 'e', 'f']
+利用列表的嵌套可以创建二维列表；也可以使用循环语句创建。
+例如：x=[[1,2,3,4,5],[5,6,7,8,9]]。
+再如：x=[[1 for x in range(n)] for y in range(m)]。
+>>> print([[1,2,3,4,5,6],[6,5,4,3,2,1]])
+[[1, 2, 3, 4, 5, 6], [6, 5, 4, 3, 2, 1]]
+>>> print([[2 for x in range(6)] for y in range(3)] )
+[[2, 2, 2, 2, 2, 2], [2, 2, 2, 2, 2, 2], [2, 2, 2, 2, 2, 2]]
+不难看出，列表中可以嵌套列表。
+
+
+编辑列表
+添加元素：可以使用insert(i,e)、append(y)和extend(z)方法等为列表添加新元素。
+insert的规则：在列表的指定位置添加元素。
+append的规则：在列表的末尾添加元素。
+extend的规则：把一个列表合并到当前列表。
+例如：x.insert(2,6)，x.apend(6)，x.extend([1,2])。
+索引与分片：列表中元素的位置（x[i[:j[:k]]]，index(x[,m[,n]])与字符串中字符的位置雷同。
+例如：s[:]，s[2:]，s[:6]，s[2:9]，s[2:9:2]，s.index(x)。
+>>> x=[1,2,3,4,5,6]
+>>> y=['a','b','c','d']
+>>> x.insert(3,9)
+>>> print(x)
+[1, 2, 3, 9, 4, 5, 6]
+>>> x.insert(-1,8)
+>>> print(x)
+[1, 2, 3, 9, 4, 5, 8, 6]
+>>> x.append(7)
+>>> print(x)
+[1, 2, 3, 9, 4, 5, 8, 6, 7]
+>>> x.extend(y[1:3])
+>>> print(x)
+[1, 2, 3, 9, 4, 5, 8, 6, 7, 'b', 'c']
+修改元素：可以利用赋值语句直接修改指定位置元素的值。
+例如：s[n]=y。
+>>> s=[1,2,3,4,5,6]
+>>> s[3]=9
+>>> print(s)
+[1, 2, 3, 9, 5, 6]
+把x改为y的方法：先利用Index(x)方法找到元素x的位置，然后利用赋值语句修改元素x的值为y。
+例如：把s中x的值改为y的表达式为s[s.index(x)]=y。
+>>> s=list(range(10))
+>>> print(s)
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+>>> s[2]=True
+>>> print(s)
+[0, 1, True, 3, 4, 5, 6, 7, 8, 9]
+>>> s[s.index(6)]='a'         #把s中6改为'a' 
+>>> print(s)
+[0, 1, True, 3, 4, 5, 'a', 7, 8, 9]
+删除元素：可以使用remove(e)，pop()，clear()和del删除元素。
+remove的规则：删除列表中指定的值。若值重复，则只删除第一个。
+pop的规则：删除指定位置的元素。默认删除最后一个。
+clear的规则：清除列表的所有对象。
+del的规则：删除指定的元素或者整个列表。
+例如：s.remove(6)，s.pop(2)，s.clear()，del s[3:6]。
+>>> s=list(range(10))
+>>> print(s)
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+>>> s.remove(4)
+>>> print(s)
+[0, 1, 2, 3, 5, 6, 7, 8, 9]
+>>> s.pop(6)
+7
+>>> print(s)
+[0, 1, 2, 3, 5, 6, 8, 9]
+>>> s.pop()
+9
+>>> print(s)
+[0, 1, 2, 3, 5, 6, 8]
+>>> del s[4]
+>>> print(s)
+[0, 1, 2, 3, 6, 8]
+>>> s.clear()
+>>> print(s)
+[]
+>>> del s
+
+
+
+使用列表
+访问列表：可以使用for实现。可以使用取子列表的方法。
+>>> for x in [1,2,3,4,5,6]:print(x)
+提示：运行时，需要两次回车。
+取子列表：使用元素的位置（x[i[:j[:k]]]）实现（即：利用分片）。
+例如：y= x[i:j:k]。
+>>> s=list(range(10))
+>>> print(s[2],s[3:6],s[2:9:3])
+2 [3, 4, 5] [2, 5, 8]
+连接列表：利用+把两个列表连接成一个新列表。
+例如：s+t。
+>>> s=['a','b','c'];t=[1,2,3]
+>>> print(s+t)
+['a', 'b', 'c', 1, 2, 3]
+长度、求和、最小和最大：利用len()、sum()、max()和min()实现。
+例如：len(s)，sum(s)，max(s)，min(s)。
+>>> s=list(range(10))
+>>> print(len(s),sum(s),max(s),min(s))
+10 45 9 0
+关系：关系运算符（<=，<，>，>=，==，!=，is，is not，in，not in）适用于列表。列表间的关系，按列表第一个不同元素的大小进行比较。
+例如：['1', '2', '3']>['a', 'b', 'c']，['a', 'b', 'c', '2']>=['a', 'c', 'c', 'D', '1']。
+>>> x=['1','2','3'];y=['a','b','c']
+>>> print(x>y,y+['2']>=['a','c','c','D','1'])
+False False
+>>> print(x is y, x != y, ['2'] in x, ['c'] not in ['a','c','c','D','1'])
+False True False True
+排序：可以使用sorted()和s.sort()实现排序。
+sorted(s,reverse=True|False)：True降序，False升序（默认）。
+例如：t= sorted(s,reverse=True)，s.sort()。
+>>> x=['1','a','2','b','3','c','4','d','5','e']
+>>> y=sorted(x,reverse=True)
+>>> print(x,y)
+['1', 'a', '2', 'b', '3', 'c', '4', 'd', '5', 'e'] ['e', 'd', 'c', 'b', 'a', '5', '4', '3', '2', '1']
+>>> x.sort()
+>>> print(x,y)
+['1', '2', '3', '4', '5', 'a', 'b', 'c', 'd', 'e'] ['e', 'd', 'c', 'b', 'a', '5', '4', '3', '2', '1']
+逆序：可以使用reversed()和s.reverse()实现。
+例如：t=list(reversed(s))，x=['1','a','2','b','3','c','4','d','5','e']。
+>>> s=list(range(10))
+>>> t= list(reversed(s))
+>>> print(s,t)
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9] [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+>>> s.reverse()
+>>> print(s,t)
+[9, 8, 7, 6, 5, 4, 3, 2, 1, 0] [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+计数：可以使用s.count(x)实现，计算x在s中的次数。
+例如：s.count(6)。
+>>> s=[1,2,3,2,3,5,6,5,6,8,9,8,8,6,5]
+>>> n=s.count(5)
+>>> print(s,n)
+[1, 2, 3, 2, 3, 5, 6, 5, 6, 8, 9, 8, 8, 6, 5] 3
+复制列表：可以使用[:]、s.copy()和copy.copy()实现。
+例如：t=s，t=s[:]，t=s.copy，t=copy.copy(s)。
+>>> a=[1,2,3]
+>>> b=a
+>>> c=a[:]
+>>> d=a.copy()
+>>> import copy
+>>> e=copy.copy(a)
+>>> print(a,b,c,d,e)
+[1, 2, 3] [1, 2, 3] [1, 2, 3] [1, 2, 3] [1, 2, 3]
+>>> print(id(a),id(b),id(c),id(d),id(e))
+2184586395208 2184586395208 2184583311560 2184586395464 2184586487624
+>>> a[0]=5
+>>> print(a,b,c,d,e)
+[5, 2, 3] [5, 2, 3] [1, 2, 3] [1, 2, 3] [1, 2, 3]
+>>> print(id(a),id(b),id(c),id(d),id(e))
+2184586395208 2184586395208 2184583311560 2184586395464 2184586487624
+>>> b[1]=6
+>>> print(a,b,c,d,e)
+[5, 6, 3] [5, 6, 3] [1, 2, 3] [1, 2, 3] [1, 2, 3]
+>>> c[0]=7
+>>> d[1]=8
+>>> e[2]=9
+>>> print(a,b,c,d,e)
+[5, 6, 3] [5, 6, 3] [7, 2, 3] [1, 8, 3] [1, 2, 9]
+>>> print(id(a),id(b),id(c),id(d),id(e))
+2184586395208 2184586395208 2184583311560 2184586395464 2184586487624
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+member = ['小','大','白','黑']
+for each in member:
+    print(each,len(member))
+    
+member = ['小','大','白','黑']    
+for each in member:
+    print(each,len(each))
+
+
+
+
+member = ['小','大','白','黑']
+member
+
+number=[1,2,3,4,5]
+number
+
+mix=[1,'小',[1,2,3,4,5],5.2]
+mix
+
+empty = []
+empty
+
+member
+member.append('男神')
+
+len(member)
+member.extend(['男神1','男神2','男神3'])
+member
+len(member)
+
+member.insert(1,'屌丝')
+member[1]
+
+del member[1]
+member
+member.pop()
+member
+
+name = member.pop()
+name
+member
+
+member.pop(1)
+member
+member[1:3]
+member[:]
+
+
+
+
+list1 = [123]
+list2 = [234]
+list1 > list2
+
+list1 = [123,456]
+list2 = [234,123]
+list1 > list2
+
+list3 = [123,456]
+(list1 < list2) and (list1 == list3)
+
+list4 = list1 +list2
+list3
+
+list4
+list3 * 3
+
+list3 *= 3
+list3
+
+123 in list3
+123 not in list3
+
+list5 = [123,['男神','屌丝']
+'男神' in list5
+list5[1][1]
+
+dir(list)
+
+list3.count
+list3.count(123)
+list3.index(123)        
+list3.index(123,3,7)
+
+         
+list3.reverse()
+list3
+         
+list6 = [1,4,2,3,7,5,6]         
+list6.sort         
+list6
+         
+list6.sort(reverse=True)         
+list6
+
+list7=list6[:]        
+list7
+         
+list8=list6         
+list8
+         
+list6.sort()
+                  
+list6         
+list7    
+list8
