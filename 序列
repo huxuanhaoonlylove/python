@@ -1,0 +1,19 @@
+zip、map和filter
+
+序列的利用率很高，所以可以使用zip、map和filter及其iter()和next()实现序列的灵活控制（即：迭代），从而遍历序列中的元素。
+
+
+zip(f,iter)：利用基本序列，生成新序列。
+map(fun,iter1,iter2,…)：利用基本序列，通过映射，生成新序列。
+filter([fun,]iter)：利用基本序列，通过映射筛选，生成新序列。
+iter(x)：创建序列对象。
+next(iter)：返回序列对象的下一个值。
+
+例4.21 迭代。输出如下迭代序列中的元素。
+it1=zip((1,2,3,4,5),(10,1.6,'Tom',True,2+3j),('a','b','c','d','e' ))
+it2=iter(zip((2,2,3,4,5),(10,1.6,'Tom',True,2+3j),('a','b','c','d','e' ))) 
+itm=map(ord,'abcdefghijklmnopqrstuvwxyz')
+it3=zip(map(chr,range(97,124)),itm)
+k=filter(bool,([],'a',(),'b',set(),'c',{},'d','','e' ))
+v=filter(bool,([],10,(),1.6,set(),'Tom',{},True,'',2+3j))
+it4=dict(zip(k,v))
