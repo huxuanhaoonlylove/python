@@ -1,0 +1,9 @@
+try:
+    x=input('输入1个整数（0，1，2，3，4，5，6）：')
+    y=int(x)
+    z=[1,2,3]
+    u=z[y]/(z[y]-2)
+except(ZeroDivisionError,ValueError,IndexError) as ex:
+    print('除数为0，或输入非整数，或下标访问越界，导致异常！')
+else:
+    print('程序运行正常结束！')
